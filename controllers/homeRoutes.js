@@ -1,6 +1,5 @@
 const router = require("express").Router();
 
-
 // All other routes respond with the index.html file
 router.get("/", (req, res) => {
   res.render("home");
@@ -10,7 +9,6 @@ router.get("/", (req, res) => {
 router.get("/notes", (req, res) => {
   res.render("notes");
 });
-
 
 /* router.get("*", async (req, res) => {
   res.render("notes");
