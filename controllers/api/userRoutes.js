@@ -34,8 +34,14 @@ router.post("/", (req, res) => {
   new_note.id = uuidv4();
   newFile.push(new_note);
   const jsonString = JSON.stringify(newFile);
-  fs.writeFile(notes, jsonString, encoding, (error) => {
-    if (error) throw error;
+  fs.writeFile(notes, jsonString, (err) => {
+    if(err) {
+      console.log(err); 
+    } else{
+      console.log("File written successfully\n");
+      console.log("The written has the following contents:");
+      console.log(fs.readFileSync(notes, "utf8"));
+    }
   });
   res.json(new_note);
 });
@@ -56,7 +62,6 @@ router.delete("/:id", (req, res) => {
       console.log("The written has the following contents:");
       console.log(fs.readFileSync(notes, "utf8"));
     }
-
   });
   res.sendStatus(204).end()
 });
