@@ -40,9 +40,13 @@ router.post("/", (req, res) => {
 });
 
 router.delete("/:id", (req, res) => {
+  console.log('Hit Delete');
   const remove = req.params.id;
+  console.log(`remove: ${remove}`);
   const filteredNotes = newFile.filter((note) => note.id !== remove);
+  console.log(`filteredNotes: ${filteredNotes}`);
   const finalNotes = JSON.stringify(filteredNotes);
+  console.log(`finalNotes: ${finalNotes}`);
   fs.writeFile(notes, finalNotes, encoding, (error) => {
     if (error) throw error;
   });
