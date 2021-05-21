@@ -31,7 +31,6 @@ router.get("/:id", (req, res) => {
 router.post("/", (req, res) => {
   const new_note = req.body;
   new_note.id = uuidv4();
-
   newFile.push(new_note);
   const jsonString = JSON.stringify(newFile);
   fs.writeFile(notes, jsonString, encoding, (error) => {
@@ -42,8 +41,8 @@ router.post("/", (req, res) => {
 
 router.delete("/:id", (req, res) => {
   const remove = req.params.id;
-  filteredNotes = newFile.filter((note) => note.id !== remove);
-  finalNotes = JSON.stringify(filteredNotes);
+  const filteredNotes = newFile.filter((note) => note.id !== remove);
+  const finalNotes = JSON.stringify(filteredNotes);
   fs.writeFile(notes, finalNotes, encoding, (error) => {
     if (error) throw error;
   });
