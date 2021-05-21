@@ -29,6 +29,7 @@ router.get("/:id", (req, res) => {
 
 // create note
 router.post("/", (req, res) => {
+  console.log(('new note'));
   const new_note = req.body;
   new_note.id = uuidv4();
   newFile.push(new_note);
