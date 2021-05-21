@@ -42,13 +42,14 @@ router.post("/", (req, res) => {
 
 router.delete("/:id", (req, res) => {
   const remove = req.params.id;
-  parsedNotes = [].concat(JSON.parse(noteData));
+  let parsedNotes = [].concat(newFile);
   filteredNotes = parsedNotes.filter((note) => note.id !== remove);
   finalNotes = JSON.stringify(filteredNotes);
   fs.writeFile(notes, finalNotes, encoding, (error) => {
     if (error) throw error;
   });
-  return res.json(newFile);
+  res.send(204).end()
 });
 
 module.exports = router;
+
