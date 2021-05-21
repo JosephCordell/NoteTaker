@@ -34,21 +34,21 @@ router.post("/", (req, res) => {
 
   newFile.push(new_note);
   const jsonString = JSON.stringify(newFile);
-  fs.writeFile(notes, jsonString);
+  fs.writeFile(notes, jsonString, encoding, (error) => {
+    if (error) throw error;
+  });
   res.json(new_note);
 });
 
 router.delete("/:id", (req, res) => {
-  const chosen = req.params.id;
-  for (let i = 0; i < newFile.length; i++) {
-    if (chosen == newFile[i].id) {
-      const removed_note = newFile.splice(i, 1);
-      const jsonString = JSON.stringify(newFile);
-      fs.writeFile(notes, jsonString);
-      return res.json(newFile);
-    }
-  }
-  return res.json(false);
+  const remove = req.params.id;
+  parsedNotes = [].concat(JSON.parse(noteData));
+  filteredNotes = parsedNotes.filter((note) => note.id !== remove);
+  finalNotes = JSON.stringify(filteredNotes);
+  fs.writeFile(notes, finalNotes, encoding, (error) => {
+    if (error) throw error;
+  });
+  return res.json(newFile);
 });
 
 module.exports = router;

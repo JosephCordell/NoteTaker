@@ -62,6 +62,9 @@ const renderActiveNote = () => {
     noteText.removeAttribute('readonly')
     noteTitle.value = '';
     noteText.value = '';
+    setTimeout(function () {
+      document.location.reload();
+    }, 100);
   }
 };
 
