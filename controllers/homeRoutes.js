@@ -13,7 +13,7 @@ router.get("/notes", (req, res) => {
 
 
 /* router.get("*", async (req, res) => {
-  res.render("home");
+  res.render("notes");
 }); */
 
 module.exports = router;
