@@ -29,29 +29,26 @@ router.get("/:id", (req, res) => {
 
 // create note
 router.post("/", (req, res) => {
-  console.log(('new note'));
   const new_note = req.body;
   new_note.id = uuidv4();
   newFile.push(new_note);
   const jsonString = JSON.stringify(newFile);
-  fs.writeFile(notes, jsonString, encoding, (error) => {
-    if (error) throw error;
+  fs.writeFile(notes, jsonString, (err) => {
+    if(err) { console.log(err) }
   });
-  res.json(new_note);
+  return res.json(newFile);
 });
 
 router.delete("/:id", (req, res) => {
-  console.log('Hit Delete');
   const remove = req.params.id;
-  console.log(`remove: ${remove}`);
-  const filteredNotes = newFile.filter((note) => note.id !== remove);
-  console.log(`filteredNotes: ${filteredNotes}`);
-  const finalNotes = JSON.stringify(filteredNotes);
-  console.log(`finalNotes: ${finalNotes}`);
-  fs.writeFile(notes, finalNotes, encoding, (error) => {
-    if (error) throw error;
+   newFile = newFile.filter((note) => note.id !== remove);
+  const finalNotes = JSON.stringify(newFile);
+  fs.writeFile(notes, finalNotes, (err) => {
+    if(err) {
+      console.log(err); 
+    } 
   });
-  res.sendStatus(204).end()
+  return res.json(newFile);
 });
 
 module.exports = router;
