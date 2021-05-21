@@ -61,9 +61,10 @@ router.delete("/:id", (req, res) => {
       console.log("File written successfully\n");
       console.log("The written has the following contents:");
       console.log(fs.readFileSync(notes, "utf8"));
+      console.log('break');
     }
   });
-  res.sendStatus(204).end()
+  res.json(newFile);
 });
 
 module.exports = router;
