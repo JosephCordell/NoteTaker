@@ -41,10 +41,8 @@ router.post("/", (req, res) => {
 });
 
 router.delete("/:id", (req, res) => {
-  console.log('Test Delete');
   const remove = req.params.id;
-  let parsedNotes = [].concat(newFile);
-  filteredNotes = parsedNotes.filter((note) => note.id !== remove);
+  filteredNotes = newFile.filter((note) => note.id !== remove);
   finalNotes = JSON.stringify(filteredNotes);
   fs.writeFile(notes, finalNotes, encoding, (error) => {
     if (error) throw error;
