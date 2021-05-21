@@ -7,7 +7,7 @@ const hbs = exphbs.create({})
 
 // Initialize the app and create a port
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3030;
 
 
 app.engine('handlebars', hbs.engine);
@@ -19,7 +19,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes)
-
 
 // Start the server on the port
 app.listen(PORT, () => console.log(`Listening on PORT: ${PORT}`));
