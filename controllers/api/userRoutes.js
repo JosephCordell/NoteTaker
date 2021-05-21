@@ -48,8 +48,15 @@ router.delete("/:id", (req, res) => {
   console.log(`filteredNotes: ${filteredNotes}`);
   const finalNotes = JSON.stringify(filteredNotes);
   console.log(`finalNotes: ${finalNotes}`);
-  fs.writeFile(notes, finalNotes, encoding, (error) => {
-    if (error) throw error;
+  fs.writeFile(notes, finalNotes, (err) => {
+    if(err) {
+      console.log(err); 
+    } else{
+      console.log("File written successfully\n");
+      console.log("The written has the following contents:");
+      console.log(fs.readFileSync(notes, "utf8"));
+    }
+
   });
   res.sendStatus(204).end()
 });
